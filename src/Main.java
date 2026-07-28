@@ -7,6 +7,7 @@ void main() {
     //variaveis de valores
     int saldo = 0;
     int chequeEspecial = 0;
+    int valorBoleto = 0;
 
     System.out.println("Informe o valor inicial de depósito:");
     saldo = scanner.nextInt();
@@ -23,7 +24,6 @@ void main() {
         System.out.print("Escolha: ");
 
         initialOption = scanner.nextInt();
-
 //opção 1 do menu
             if (initialOption == 1) {
 
@@ -95,6 +95,14 @@ void main() {
 //opção menu 5
         if (initialOption == 5) {
             System.out.println("Qual o valor de seu boleto?");
+            valorBoleto = scanner.nextInt();
+            System.out.println("Deseja pagar seu boleto juntamente com o cheque especial?");
+            var optionBoleto =  scanner.next();
+            if (optionBoleto.equalsIgnoreCase("sim")) {
+                int calculo = saldo + chequeEspecial - valorBoleto;
+                System.out.println(calculo);
+
+            }
         }
 
     }while (initialOption != 0) ;
