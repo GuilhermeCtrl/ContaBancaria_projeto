@@ -5,10 +5,10 @@ void main() {
     String option;
 
     //variaveis de valores
-    double saldo = 0;
-    double limiteChequeEspecial = 0;
-    double chequeEspecial = 0;
-    double valorBoleto = 0;
+    double saldo = contaBanco.saldo;
+    double limiteChequeEspecial = contaBanco.limiteChequeEspecial;
+    double chequeEspecial = contaBanco.chequeEspecial;
+    double valorBoleto = contaBanco.valorBoleto;
 
     System.out.println("Informe o valor inicial de depósito:");
     saldo = scanner.nextDouble();
@@ -105,25 +105,21 @@ void main() {
             double calculo = 0;
             double taxa = 0.0;
             if (optionBoleto.equalsIgnoreCase("sim")) {
-                calculo = saldo + chequeEspecial - valorBoleto;
+                calculo = chequeEspecial - valorBoleto;
+                if (calculo <= 0){
+                    calculo = saldo + chequeEspecial - valorBoleto;
+                }
                 saldo = calculo;
                 taxa = chequeEspecial * 0.20;
-                System.out.println(taxa);
+                System.out.println("Sua taxa foi de:"+taxa);
                 saldo -= taxa;
 
             }else{
                 calculo = saldo - valorBoleto;
                 saldo -= calculo;
             }
-            //voltar ou sair menu
-            System.out.println("Deseja voltar ao menu?");
-            option = scanner.next();
-            if (option.equalsIgnoreCase("sim")) {
-                initialOption = 9;
-            } else {
-                System.out.println("OK, saindo!");
-                initialOption = 0;
-            }
+
+            new retornarMenu();
         }
 
     }while (initialOption != 0) ;
