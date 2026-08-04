@@ -4,6 +4,7 @@ void main() {
     var scanner = new Scanner(System.in);
     String option;
 
+
     //variaveis de valores
     double saldo = contaBanco.saldo;
     double limiteChequeEspecial = contaBanco.limiteChequeEspecial;
@@ -37,47 +38,38 @@ void main() {
 
                 System.out.printf("Seu saldo atual é: %s + %s de cheque especial\n", saldo, chequeEspecial);
 
-
-                System.out.println("Deseja voltar ao menu?");
-                option = scanner.next();
-                if (option.equalsIgnoreCase("sim")) {
+                //voltar ou sair menu
+                if (Menu.perguntarMenu()) {
                     initialOption = 9;
-                } else {
-                    System.out.println("OK, saindo!");
+                }else{
                     initialOption = 0;
-
                 }
+
             }
 
 //opção 2 do menu
             if (initialOption == 2) {
 
                 System.out.printf("Seu limite de cheque especial é de: %s\n", limiteChequeEspecial);
-                //voltar ou sair menu
-                System.out.println("Deseja voltar ao menu?");
-                option = scanner.next();
-                if (option.equalsIgnoreCase("sim")) {
-                    initialOption = 9;
-                } else {
-                    System.out.println("OK, saindo!");
-                    initialOption = 0;
 
+                //voltar ou sair menu
+                if (Menu.perguntarMenu()) {
+                    initialOption = 9;
+                }else{
+                    initialOption = 0;
                 }
         }
 //opção 3 do menu
         if (initialOption == 3) {
             System.out.println("Quanto deseja depositar?");
             saldo += scanner.nextDouble();
+
             //voltar ou sair menu
-            System.out.println("Deseja voltar ao menu?");
-            option = scanner.next();
-            if (option.equalsIgnoreCase("sim")) {
+            if (Menu.perguntarMenu()) {
                 initialOption = 9;
-            } else {
-                System.out.println("OK, saindo!");
+            }else{
                 initialOption = 0;
             }
-
         }
 //opção 4 do menu
         if (initialOption == 4) {
@@ -86,15 +78,11 @@ void main() {
             System.out.println("OK!");
 
             //voltar ou sair menu
-            System.out.println("Deseja voltar ao menu?");
-            option = scanner.next();
-            if (option.equalsIgnoreCase("sim")) {
+            if (Menu.perguntarMenu()) {
                 initialOption = 9;
-            } else {
-                System.out.println("OK, saindo!");
+            }else{
                 initialOption = 0;
             }
-
         }
 //opção menu 5
         if (initialOption == 5) {
@@ -102,24 +90,10 @@ void main() {
             valorBoleto = scanner.nextDouble();
             System.out.println("Deseja pagar seu boleto juntamente com o cheque especial?");
             var optionBoleto =  scanner.next();
-            double calculo = 0;
-            double taxa = 0.0;
-            if (optionBoleto.equalsIgnoreCase("sim")) {
-                calculo = chequeEspecial - valorBoleto;
-                if (calculo <= 0){
-                    calculo = saldo + chequeEspecial - valorBoleto;
-                }
-                saldo = calculo;
-                taxa = chequeEspecial * 0.20;
-                System.out.println("Sua taxa foi de:"+taxa);
-                saldo -= taxa;
 
-            }else{
-                calculo = saldo - valorBoleto;
-                saldo -= calculo;
-            }
+            if (optionBoleto.equals("Sim")) {}
+            
 
-            new retornarMenu();
         }
 
     }while (initialOption != 0) ;
