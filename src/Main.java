@@ -50,7 +50,7 @@ void main() {
 //opção 2 do menu
             if (initialOption == 2) {
 
-                System.out.printf("Seu limite de cheque especial é de: %s\n", limiteChequeEspecial);
+                System.out.printf("Seu limite de cheque especial é de: %s e o valor atual é: %s\n", limiteChequeEspecial, chequeEspecial);
 
                 //voltar ou sair menu
                 if (Menu.perguntarMenu()) {
@@ -88,10 +88,20 @@ void main() {
         if (initialOption == 5) {
             System.out.println("Qual o valor de seu boleto?");
             valorBoleto = scanner.nextDouble();
-            System.out.println("Deseja pagar seu boleto juntamente com o cheque especial?");
-            var optionBoleto =  scanner.next();
+            //System.out.println("Deseja pagar seu boleto juntamente com o cheque especial?");
+            //var optionBoleto =  scanner.next();
 
-            if (optionBoleto.equals("Sim")) {}
+            double saldoFinal = 0;
+                saldoFinal = saldo - valorBoleto;
+                if (saldoFinal < 0){
+                    System.out.println("Deseja pagar seu boleto juntamente com o cheque especial?");
+                    var optionBoleto =  scanner.next();
+                    if (optionBoleto.equalsIgnoreCase("Sim")){
+                        double chequeFinal = chequeEspecial - saldoFinal;
+                    }
+                }
+            saldo = saldoFinal;
+            //chequeEspecial = chequeFinal;
             
 
         }
