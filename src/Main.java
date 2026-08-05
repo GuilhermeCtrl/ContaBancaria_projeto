@@ -10,9 +10,13 @@ void main() {
     double limiteChequeEspecial = contaBanco.limiteChequeEspecial;
     double chequeEspecial = contaBanco.chequeEspecial;
     double valorBoleto = contaBanco.valorBoleto;
+        double saldoFinal = 0;
+        double taxa = 0;
+        double chequeUtilizado = 0;
 
     System.out.println("Informe o valor inicial de depósito:");
     saldo = scanner.nextDouble();
+    double saldoInicial = saldo;
         if (saldo <= 500) {
             limiteChequeEspecial = 50;
             chequeEspecial = 50;
@@ -63,13 +67,10 @@ void main() {
         if (initialOption == 3) {
             System.out.println("Quanto deseja depositar?");
             saldo += scanner.nextDouble();
-
+            saldo -= taxa;
+            taxa = 0;
             //voltar ou sair menu
-            if (Menu.perguntarMenu()) {
-                initialOption = 9;
-            }else{
-                initialOption = 0;
-            }
+            Menu.perguntarMenu();
         }
 //opção 4 do menu
         if (initialOption == 4) {
@@ -88,22 +89,40 @@ void main() {
         if (initialOption == 5) {
             System.out.println("Qual o valor de seu boleto?");
             valorBoleto = scanner.nextDouble();
-            //System.out.println("Deseja pagar seu boleto juntamente com o cheque especial?");
-            //var optionBoleto =  scanner.next();
-
-            double saldoFinal = 0;
+            if (valorBoleto <= 0){
+                do {
+                System.out.println("Por favor, insira um valor válido.");
+                valorBoleto = scanner.nextDouble();
+                }while (valorBoleto <= 0);
+            }
                 saldoFinal = saldo - valorBoleto;
+                //verificar se precisa de cheque especial
                 if (saldoFinal < 0){
                     System.out.println("Deseja pagar seu boleto juntamente com o cheque especial?");
                     var optionBoleto =  scanner.next();
                     if (optionBoleto.equalsIgnoreCase("Sim")){
-                        double chequeFinal = chequeEspecial - saldoFinal;
+                        double chequeFinal = chequeEspecial + saldoFinal;
+                        if (chequeFinal < 0){
+                            System.out.println("Seu saldo + limite não atinge o valor do boleto.");
+                            Menu.perguntarMenu();
+                            initialOption = 9;
+                        }else{
+                        System.out.println("Boleto pago!");
+                        taxa = (chequeEspecial - chequeFinal) * 0.20;
+                        chequeUtilizado = (chequeEspecial - chequeFinal);
+                        chequeEspecial = chequeFinal;
+                        Menu.perguntarMenu();
+                        }
+                    }else{
+                        System.out.println("Infelizmente o pagamento não pode ser feito, seu saldo + limite não atinge o valor do boleto.");
+                        System.out.println("Voltando ao menu.");
                     }
-                }
-            saldo = saldoFinal;
-            //chequeEspecial = chequeFinal;
-            
 
+                }else{
+                    System.out.println("Boleto pago!");
+                    saldo = saldoFinal;
+                    Menu.perguntarMenu();
+                }
         }
 
     }while (initialOption != 0) ;
