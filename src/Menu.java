@@ -20,9 +20,11 @@ public class Menu {
             if (option.equalsIgnoreCase("sim")) {
                 clearRunConsole();
                 return true;
+
             } else if (option.equalsIgnoreCase("não")) {
                 System.out.println("OK, saindo!");
                 clearRunConsole();
+
                 return false;
             }else{
                 System.out.println("Por favor, digite um valor válido, SIM ou NÃO!");
