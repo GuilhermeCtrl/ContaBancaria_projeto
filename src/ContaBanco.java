@@ -1,6 +1,5 @@
 public class ContaBanco {
 
-    int initialOption = 0;
     double saldo = 0;
     double limiteChequeEspecial  = 0;
     double chequeEspecial  = 0;
@@ -13,6 +12,4 @@ public class ContaBanco {
     double saldoFinal = 0;
     String optionBoleto;
     double chequeFinal = 0;
-    double taxaFinal = 0;
-    double chequeUtilizadoFinal = 0;
 }

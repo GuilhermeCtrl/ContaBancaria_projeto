@@ -1,6 +1,7 @@
 void main() {
 
-    int initialOption = 0;
+    boolean continuar = true;
+    int initialOption;
     var scanner = new Scanner(System.in);
 
     //variaveis de valores
@@ -8,10 +9,10 @@ void main() {
 
     System.out.println("Informe o valor inicial de depósito:");
     conta.saldo = scanner.nextDouble();
-    do {
+    while (conta.saldo <= 0){
         System.out.println("Informe um valor válido:");
         conta.saldo = scanner.nextDouble();
-    }while(conta.saldo <= 0);
+    }
 
     //double saldoInicial = saldo;
     if (conta.saldo <= 500) {
@@ -34,39 +35,48 @@ void main() {
         System.out.print("Escolha: ");
 
         initialOption = scanner.nextInt();
-//opção 1 do menu
-        if (initialOption == 1) {
-        OperacoesBanco.consultarSaldo(conta.saldo, conta.limiteChequeEspecial);
+
+//opções do menu
+        switch(initialOption) {
+            case 1:
+                OperacoesBanco.consultarSaldo(conta.saldo, conta.limiteChequeEspecial);
+                continuar = Menu.perguntarMenu(scanner);
+                break;
+
+            case 2:
+                OperacoesBanco.consultarLimiteChequeEspecial(conta.saldo, conta.limiteChequeEspecial);
+                continuar = Menu.perguntarMenu(scanner);
+                break;
+
+            case 3:
+                OperacoesBanco.depositarDinheiro(conta, scanner);
+                continuar = Menu.perguntarMenu(scanner);
+                break;
+
+            case 4:
+                OperacoesBanco.sacarDinheiro(conta, scanner);
+                continuar = Menu.perguntarMenu(scanner);
+                break;
+
+            case 5:
+                OperacoesBanco.pagarBoleto(conta, scanner);
+                continuar = Menu.perguntarMenu(scanner);
+                break;
+
+            case 6:
+                OperacoesBanco.verUsoCheque(conta);
+                continuar = Menu.perguntarMenu(scanner);
+                break;
+
+            case 0:
+                System.out.println("OK, SAINDO...");
+                break;
+
+            default:
+                System.out.println("ERRO, INVALIDO, INSIRA UM VALOR VÁLIDO!");
         }
 
-//opção 2 do menu
-        if (initialOption == 2) {
-        OperacoesBanco.consultarLimiteChequeEspecial(conta.chequeEspecial, conta.limiteChequeEspecial);
-        }
-
-//opção 3 do menu
-
-        if (initialOption == 3) {
-            OperacoesBanco.depositarDinheiro(conta, scanner);
-        }
-
-//opção 4 do menu
-        //double saque = 0;
-        if (initialOption == 4) {
-            OperacoesBanco.sacarDinheiro(conta, scanner);
-        }
-//opção menu 5
-        if (initialOption == 5) {
-        OperacoesBanco.pagarBoleto(conta, scanner);
-        }
-
-//opção menu 6
-    if (initialOption == 6) {
-        OperacoesBanco.verUsoCheque(conta, scanner);
-    }
-
-    } while (initialOption != 0);
-
-    System.out.print("OK! SAINDO...");
+    } while (continuar);
+        System.out.println("OK, SAINDO...");
 
 }

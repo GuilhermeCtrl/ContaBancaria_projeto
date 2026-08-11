@@ -9,12 +9,11 @@ public class Menu {
     }
 
 
-    static public boolean perguntarMenu() {
+    static public boolean perguntarMenu(Scanner scanner) {
     String option;
-    Scanner scanner = new Scanner(System.in);
 
         //voltar ou sair menu
-        do {
+        while(true) {
             System.out.println("Deseja voltar ao menu?");
             option = scanner.next();
             if (option.equalsIgnoreCase("sim")) {
@@ -22,16 +21,12 @@ public class Menu {
                 return true;
 
             } else if (option.equalsIgnoreCase("não")) {
-                System.out.println("OK, saindo!");
                 clearRunConsole();
-
                 return false;
             }else{
                 System.out.println("Por favor, digite um valor válido, SIM ou NÃO!");
             }
-        }while (!option.equalsIgnoreCase("sim") && !option.equalsIgnoreCase("não"));
-
-        return false;
+        }
     }
 }
 

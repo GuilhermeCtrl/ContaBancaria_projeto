@@ -1,21 +1,19 @@
 import java.util.Scanner;
 
 public class OperacoesBanco {
-//scanner pra ler as resposta
-    static Scanner scanner = new Scanner(System.in);
 
 //opção 1
     public static void consultarSaldo(double saldo, double chequeEspecial) {
         System.out.printf("Seu saldo atual é: %s + %s de cheque especial%n", saldo, chequeEspecial);
         //voltar ou sair menu
-        Menu.perguntarMenu();
+
     }
 
 //opção 2
     public static void consultarLimiteChequeEspecial(double limiteChequeEspecial, double chequeEspecial) {
         System.out.printf("Seu limite de cheque especial é de: %s e o valor atual é: %s\n", limiteChequeEspecial, chequeEspecial);
         //voltar ou sair menu
-        Menu.perguntarMenu();
+
     }
 
 //opção 3
@@ -27,7 +25,7 @@ public class OperacoesBanco {
         conta.taxa = 0;
         conta.chequeEspecial = conta.limiteChequeEspecial;
         System.out.println("Saldo depositado!");
-        Menu.perguntarMenu();
+
     }
 
 //opção 4
@@ -41,7 +39,7 @@ public class OperacoesBanco {
             if (conta.option.equalsIgnoreCase("Sim")){
                 if (conta.saque > conta.saldo + conta.chequeEspecial){
                     System.out.println("Saldo + cheque especial insuficiente para completar o saque!");
-                    Menu.perguntarMenu();
+
                 }else{
                     conta.valorUsadoCheque = conta.saque - conta.saldo;
                     conta.chequeEspecial -= conta.valorUsadoCheque;
@@ -50,16 +48,16 @@ public class OperacoesBanco {
                     conta.taxa = conta.valorUsadoCheque * 0.20;
                     System.out.printf("Como foi utilizado cheque especial, o valor da taxa é de: %s R$\n", conta.taxa);
                     conta.chequeUtilizado = conta.valorUsadoCheque;
-                    Menu.perguntarMenu();
+
                 }
             }else{
                 System.out.println("Saldo insuficiente para completar o saque!");
-                Menu.perguntarMenu();
+
             }
         }else{
             System.out.println("Saque realizado!");
             conta.saldo -= conta.saque;
-            Menu.perguntarMenu();
+
         }
     }
 
@@ -82,7 +80,7 @@ public class OperacoesBanco {
                     conta.chequeFinal = conta.chequeEspecial + conta.saldoFinal;
                     if (conta.chequeFinal < 0) {
                         System.out.println("Seu saldo + limite não atinge o valor do boleto.");
-                        Menu.perguntarMenu();
+
                     } else {
                         System.out.println("Boleto pago!");
                         conta.taxa = (conta.chequeEspecial - conta.chequeFinal) * 0.20;
@@ -90,25 +88,24 @@ public class OperacoesBanco {
                         conta.chequeEspecial = conta.chequeFinal;
                         conta.saldo = conta.saldoFinal;
                         System.out.printf("Por usar seu cheque especial, em seu próximo depósito, você pagará %s R$ de taxa.\n",conta.taxa);
-                        Menu.perguntarMenu();
+
                     }
                 } else {
                     System.out.println("Infelizmente o pagamento não pode ser feito, seu saldo + limite não atinge o valor do boleto.");
-                    Menu.perguntarMenu();
+
                 }
 
             } else {
                 System.out.println("Boleto pago!");
                 conta.saldo = conta.saldoFinal;
-                Menu.perguntarMenu();
+
             }
         }
 
 //opção 6
-    public static void verUsoCheque(ContaBanco conta, Scanner scanner) {
+    public static void verUsoCheque(ContaBanco conta) {
         System.out.printf("Seu valor último valor utilizado do cheque especial foi de: %s R$\n",conta.chequeUtilizado);
         System.out.printf("A taxa a ser paga pelo valor utilizado será de: %s R$\n", conta.taxa);
-        Menu.perguntarMenu();
     }
 
     }
